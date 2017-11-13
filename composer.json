@@ -9,6 +9,12 @@
             "homepage": "https://github.com/zechdc"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/zechdc/oauth1-etrade"
+        }
+    ],
     "keywords": [
         "oauth",
         "oauth1",
