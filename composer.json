@@ -1,0 +1,44 @@
+{
+    "name": "wheniwork/oauth1-intuit",
+    "description": "Intuit OAuth 1.0 Client Provider for The PHP League OAuth1-Client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Woody Gilk",
+            "email": "woody.gilk@gmail.com",
+            "homepage": "https://github.com/shadowhand"
+        },
+        {
+            "name": "Daniel Olfelt",
+            "email": "dolfelt@gmail.com",
+            "homepage": "https://github.com/dolfelt"
+        }
+    ],
+    "keywords": [
+        "oauth",
+        "oauth1",
+        "client",
+        "authorization",
+        "authorisation",
+        "intuit",
+        "quickbooks"
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "league/oauth1-client": "~1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "mockery/mockery": "~0.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wheniwork\\OAuth1\\Client\\Server\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wheniwork\\OAuth1\\Client\\Test\\Server\\": "tests/src/"
+        }
+    }
+}
