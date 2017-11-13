@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Wheniwork\\OAuth1\\Client\\Server\\": "src/"
+            "Zechdc\\OAuth1\\Client\\Server\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Wheniwork\\OAuth1\\Client\\Test\\Server\\": "tests/src/"
+            "Zechdc\\OAuth1\\Client\\Test\\Server\\": "tests/src/"
         }
     }
 }
