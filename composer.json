@@ -1,17 +1,12 @@
 {
-    "name": "wheniwork/oauth1-intuit",
-    "description": "Intuit OAuth 1.0 Client Provider for The PHP League OAuth1-Client",
+    "name": "zechdc/oauth1-etrade",
+    "description": "ETrade OAuth 1.0 Client Provider for The PHP League OAuth1-Client",
     "license": "MIT",
     "authors": [
         {
-            "name": "Woody Gilk",
-            "email": "woody.gilk@gmail.com",
-            "homepage": "https://github.com/shadowhand"
-        },
-        {
-            "name": "Daniel Olfelt",
-            "email": "dolfelt@gmail.com",
-            "homepage": "https://github.com/dolfelt"
+            "name": "Zechariah Campbell",
+            "email": "zech.campbell@gmail.com",
+            "homepage": "https://github.com/zechdc"
         }
     ],
     "keywords": [
@@ -20,8 +15,8 @@
         "client",
         "authorization",
         "authorisation",
-        "intuit",
-        "quickbooks"
+        "etrade",
+        "stocks"
     ],
     "require": {
         "php": ">=5.4.0",
