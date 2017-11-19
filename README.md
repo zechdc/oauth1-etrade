@@ -18,6 +18,7 @@ Usage is the same as The League's OAuth client, using `Zechdc\OAuth1\Client\Serv
 $server = new Zechdc\OAuth1\Client\Server\Etrade(array(
     'identifier'   => 'your-identifier',
     'secret'       => 'your-secret',
-    'callback_uri' => 'http://your-callback-uri/',
 ));
 ```
+
+You must contact Etrade to setup your callback URL. 
