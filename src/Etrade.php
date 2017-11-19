@@ -8,11 +8,21 @@ namespace Zechdc\OAuth1\Client\Server;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Server\Server;
 use League\OAuth1\Client\Server\User;
+use League\OAuth1\Client\Signature\SignatureInterface;
 use Mockery\Exception;
 
 class Etrade extends Server
 {
     protected $responseType = 'json';
+    protected $defaultClientConfig = [
+      'callback_uri' => 'oob'
+    ];
+
+    public function __construct($clientCredentials, SignatureInterface $signature = null)
+    {
+      $clientCredentials = array_replace($this->defaultClientConfig, $clientCredentials);
+      parent::__construct($clientCredentials, $signature);
+    }
 
     public function urlTemporaryCredentials()
     {
