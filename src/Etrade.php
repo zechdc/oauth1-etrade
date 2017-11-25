@@ -10,6 +10,7 @@ use League\OAuth1\Client\Server\Server;
 use League\OAuth1\Client\Server\User;
 use League\OAuth1\Client\Signature\SignatureInterface;
 use Mockery\Exception;
+use League\OAuth1\Client\Credentials\TemporaryCredentials;
 
 class Etrade extends Server
 {
@@ -62,5 +63,45 @@ class Etrade extends Server
     public function userScreenName($data, TokenCredentials $tokenCredentials)
     {
         throw new Exception("etrade does not provide a user details API");
+    }
+
+    /**
+     * Had to overwrite the method so we include the oauth_verifier
+     * in the headers instead of body as etrade requires
+     *
+     * @param TemporaryCredentials $temporaryCredentials
+     * @param string $temporaryIdentifier
+     * @param string $verifier
+     * @return TokenCredentials|void
+     */
+    public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
+    {
+      if ($temporaryIdentifier !== $temporaryCredentials->getIdentifier()) {
+        throw new \InvalidArgumentException(
+          'Temporary identifier passed back by server does not match that of stored temporary credentials.
+                  Potential man-in-the-middle.'
+        );
+      }
+
+      $uri = $this->urlTokenCredentials();
+      $bodyParameters = array('oauth_verifier' => $verifier);
+
+
+      $client = $this->createHttpClient();
+
+      $headers = $this->getHeaders($temporaryCredentials, 'POST', $uri, $bodyParameters);
+
+      //This is the wonky bit, we append oauth_verifier to the Authorization header
+      $headers['Authorization'] = $headers['Authorization'] . ', oauth_verifier="' . $verifier . '"';
+
+      try {
+        $response = $client->post($uri, [
+          'headers' => $headers
+        ]);
+      } catch (BadResponseException $e) {
+        return $this->handleTokenCredentialsBadResponse($e);
+      }
+
+      return $this->createTokenCredentials((string) $response->getBody());
     }
 }
