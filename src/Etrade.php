@@ -66,6 +66,29 @@ class Etrade extends Server
     }
 
     /**
+     * Overwrite method to add key and token as params for etrade
+     *
+     * @param TemporaryCredentials|string $temporaryIdentifier
+     * @return string
+     */
+    public function getAuthorizationUrl($temporaryIdentifier)
+    {
+      // Somebody can pass through an instance of temporary
+      // credentials and we'll extract the identifier from there.
+      if ($temporaryIdentifier instanceof TemporaryCredentials) {
+        $temporaryIdentifier = $temporaryIdentifier->getIdentifier();
+      }
+
+      $parameters = ['key' => $this->clientCredentials->getIdentifier(),
+        'token' => $temporaryIdentifier];
+
+      $url = $this->urlAuthorization();
+      $queryString = http_build_query($parameters);
+
+      return $this->buildUrl($url, $queryString);
+    }
+
+  /**
      * Had to overwrite the method so we include the oauth_verifier
      * in the headers instead of body as etrade requires
      *
